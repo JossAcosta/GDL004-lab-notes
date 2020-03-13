@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 
 import Home from '../pages/home';
-// import Dashboard from '../pages/dashboard';
+import Dashboard from '../pages/dashboard';
 // import NewNote from '../pages/newNote';
 // import SingleNote from '../pages/noteDetails';
 // import NoteEdit from '../pages/noteEdit';
@@ -17,9 +17,9 @@ function App(){
        
            <Switch>
              <Route exact path="/" component={Home} />   
-{/*           
+         
                <Route exact path="/notes" component={Dashboard} />
-               <Route exact path="/notes/new" component={NewNote} />
+              {/*   <Route exact path="/notes/new" component={NewNote} />
                <Route exact path="/notes/:noteId" component={SingleNote} />
                <Route exact path="/notes/:noteId/edit" component={NoteEdit} />
                <Route path= "#" component={NotFound} /> */}

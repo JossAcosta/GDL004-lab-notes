@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from '../images/logo.png';
+import Login from '../model/auth';
 
 import './styles/home.css';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -26,9 +27,9 @@ class Home extends React.Component{
                  <div className="container-fluid head">
             
                 <img src={logo} alt="Logo"/>
-                <span className="font-weigth-ligth title_LAB">L A B  -     </span>
+                <span className="font-weigth-ligth title_LAB">L A B      </span>
                 
-                <span className="font-weigth-bold title_notes"> -  N O T E S !</span>
+                <span className="font-weigth-bold title_notes">   N O T E S !</span>
             
             </div>
               
@@ -93,6 +94,7 @@ class Home extends React.Component{
                       </div>
                     </div>
                     <a href="/" className="forgotPass">Forgot password?</a>
+                    <Login />
                     <input type="submit" defaultValue="Login" className="btn btn_red" />
                   </div>
                 </form>

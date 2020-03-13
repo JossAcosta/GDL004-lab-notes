@@ -1,13 +1,43 @@
 import React from 'react';
 import logo from '../images/logo.png';
-import Login from '../model/auth';
+// import LoginWithGoogle from '../model/auth/authWithGoogle';
 
 import './styles/home.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import fire from '../firebase';
 
 
 class Home extends React.Component{
- 
+  constructor(props) {
+    super(props);
+    this.login = this.login.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.signup = this.signup.bind(this);
+    this.state={
+      name:"",
+      email:"",
+      password:""
+    }
+    
+}
+
+login(e){
+ e.preventDefault()
+ fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+ .then((u)=>{
+   console.log(u)
+ }).catch((err)=> {
+    console.log(err);
+ })
+}
+signup(e){
+  e.preventDefault();
+  fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
+    console.log(u)
+  }).catch((err)=> {
+    console.log(err);
+ });
+}
     actionHandleLogin = e => {
         const wrap = document.getElementById('main');
         wrap.classList.remove("singUpActive");
@@ -20,6 +50,11 @@ class Home extends React.Component{
         wrap.classList.remove("loginActive");
     
     }
+ handleChange(e){
+   this.setState({
+     [e.target.name] : e.target.value
+   })
+ }
 
     render(){
         return (
@@ -63,19 +98,33 @@ class Home extends React.Component{
                     <legend className="title">Sing Up</legend>
                     <div className="input_block">
                       <div className="input_wrap">
-                        <input type="text" id="sing_name" className="input" placeholder="Full Name" />
+                        <input type="text" id="sing_name" className="input" placeholder="Full Name" 
+                          name="name"
+                          onChange={this.handleChange}
+                          vaue={this.state.name}
+                         />
                         <label htmlFor="sing_name" className="label_name" />
                       </div>
                       <div className="input_wrap">
-                        <input type="text" id="sing_email" className="input" placeholder="Email" />
+                        <input type="text" id="sing_email" className="input" placeholder="Email"  
+                        name="email"
+                        onChange ={this.handleChange} 
+                        value={this.state.email}
+                        />
                         <label htmlFor="sing_email" className="label_mail" />
                       </div>
                       <div className="input_wrap">
-                        <input type="text" id="sing_pass" className="input" placeholder="Password" />
+                        <input type="password" id="sing_pass" className="input" placeholder="Password"  
+                         name="password"
+                         onChange ={this.handleChange}
+                         value={this.state.password}
+                         />
                         <label htmlFor="sing_pass" className="label_pass" />
                       </div>
                     </div>
-                    <input type="submit" defaultValue="Sing Up" className="btn btn_red" />
+                    <input type="submit" defaultValue="Sing Up" className="btn btn_red" 
+                      onClick={this.signup}
+                      />
                   </div>
                 </form>
               </div>
@@ -85,17 +134,26 @@ class Home extends React.Component{
                     <legend className="title">Log in</legend>
                     <div className="input_block">
                       <div className="input_wrap">
-                        <input type="text" id="mail" className="input" placeholder="Email" />
+                        <input type="text" id="mail" className="input" placeholder="Email"
+                       name="email"
+                       onChange ={this.handleChange}
+                        value={this.state.email} />
                         <label htmlFor="sing_pass" className="label_mail" />
                       </div>
                       <div className="input_wrap">
-                        <input type="text" id="pass" className="input" placeholder="Password" />
+                        <input type="text" id="pass" className="input" placeholder="Password" 
+                        name="password"
+                        onChange ={this.handleChange}
+                        value={this.state.password}/>
                         <label htmlFor="sing_pass" className="label_pass" />
                       </div>
                     </div>
                     <a href="/" className="forgotPass">Forgot password?</a>
-                    <Login />
-                    <input type="submit" defaultValue="Login" className="btn btn_red" />
+                    {/* <LoginWithGoogle  history={this.props.history}/> */}
+                    <input type="submit"
+                    onClick={this.login} defaultValue="Login" className="btn btn_red" />
+                     <input type="submit" defaultValue="Sing Up" className="btn_red" 
+                    />
                   </div>
                 </form>
               </div>

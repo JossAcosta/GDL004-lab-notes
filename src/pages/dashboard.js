@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+
 import fire from '../firebase.js';
 
 // import LogOut from '../model/auth/logOut';
 
-// import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 
 
@@ -20,7 +20,10 @@ class Dashboard extends Component {
         }
     }
     logout(){
-        fire.auth().signOut();
+        fire.auth().signOut()
+       
+           .then(window.location = "/");
+     
     }
     render()
     {

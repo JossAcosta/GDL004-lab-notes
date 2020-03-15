@@ -5,19 +5,28 @@ import logo from '../images/logo.png';
 import './styles/home.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import fire from '../firebase';
-
-
+import { app } from 'firebase';
+import GoogleLogo from '../images/googleLogo.svg';
+import {provider} from '../firebase';
 class Home extends React.Component{
   constructor(props) {
     super(props);
     this.login = this.login.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.signup = this.signup.bind(this);
+   
     this.state={
       name:"",
       email:"",
-      password:""
+      password:"",
+     
     }
+    
+}
+
+signInWithGoogle = (e) => {
+e.preventDefault()
+
     
 }
 
@@ -25,6 +34,7 @@ login(e){
  e.preventDefault()
  fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
  .then((u)=>{
+   this.props.history.push("/notes")
    console.log(u)
  }).catch((err)=> {
     console.log(err);
@@ -149,7 +159,8 @@ signup(e){
                       </div>
                     </div>
                     <a href="/" className="forgotPass">Forgot password?</a>
-                    {/* <LoginWithGoogle  history={this.props.history}/> */}
+                   
+                    <a onClick= {this.signInWithGoogle} > <img src={GoogleLogo} alt="Google Logo"/></a>
                     <input type="submit"
                     onClick={this.login} defaultValue="Login" className="btn btn_red" />
                      <input type="submit" defaultValue="Sing Up" className="btn_red" 

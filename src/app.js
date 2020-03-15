@@ -40,10 +40,11 @@ render(){
      
      <Switch>
                 {this.state.user ?
-             (<Dashboard />)
-           :
-       
-            ( <Home/>)
+            (<Route exact path = "/notes" component = {Dashboard} />)
+        //     (<Dashboard />)
+          :
+         ( <Route exact path = "/" component = {Home} />)
+            // ( <Home/>)
              
              }
        

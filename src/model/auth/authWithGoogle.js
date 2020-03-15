@@ -1,13 +1,29 @@
+// import firebase, {auth, provider} from './firebase.js'
+// //Add Contstructor to AppRouter component
+// class LoginWithGoogle extends Component {
+//         render(){
+// constructor(props){
+//     super(props);
+//     this.state = {user: null}
+// }
+// //Add componentDidMount lifecycle
+// componentDidMount(){
+//     auth.onAuthStateChanged(user => {
+//     if(user){
+//         this.setState({user});
+//     }
+// });
+// }}
+
+
 // import React, { Component } from "react";
 // import withFirebaseAuth from 'react-with-firebase-auth';
 // import * as firebase from 'firebase/app';
 // import 'firebase/auth';
-// import firebaseConfig from '../../firebase';
+// import fire from '../firebase';
 // import GoogleLogo from '../../images/googleLogo.svg'
 
  
-
-// const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 // class LoginWithGoogle extends Component {
 //     render(){
@@ -38,12 +54,12 @@
 
 
 
-// const firebaseAppAuth= firebaseApp.auth();
+// // const firebaseAppAuth= firebaseApp.auth();
 // const providers={
 //     googleProvider : new firebase.auth.GoogleAuthProvider(),
 // };
 // export default withFirebaseAuth({
-//     providers,
-//     firebaseAppAuth,
+//     // providers,
+//     // firebaseAppAuth,
 
 // })(LoginWithGoogle);

@@ -1,0 +1,13 @@
+.navbar {
+    background-color:  #fdd365;
+    color: rgba(0, 0, 0, 0.55);
+    box-shadow: 0 0 10px 3px rgba(39, 37, 37, 0.45);
+}
+.title_navabar{
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.55);
+
+}
+.navbar button {
+    color: rgba(0, 0, 0, 0.55);   
+}

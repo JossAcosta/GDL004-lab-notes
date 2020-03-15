@@ -18,10 +18,8 @@ class Home extends React.Component{
     this.state={
       name:"",
       email:"",
-      password:"",
-     
+      password:"",   
     }
-    
 }
 
 signInWithGoogle (e){
@@ -31,14 +29,10 @@ let googleSignInAttempt = fire.auth().signInWithPopup(provider);
 googleSignInAttempt
     .then(result => {
       this.props.history.push("/notes")
-     
-     
     })
     .catch(error => {
       this.setState({message: error.message});
     });
-
-
 }
 
 login(e){
@@ -80,7 +74,7 @@ signup(e){
 
     render(){
         return (
-            <div>
+            <div className="home">
                  <div className="container-fluid head">
             
                 <img src={logo} alt="Logo"/>
@@ -187,6 +181,7 @@ signup(e){
         </div>
       </div>
             </div>
+            
         )
     }
 

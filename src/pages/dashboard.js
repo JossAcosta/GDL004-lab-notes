@@ -1,41 +1,26 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
-
-import fire from '../firebase.js';
-
-// import LogOut from '../model/auth/logOut';
-
+import Navbar from '../components/navbar';
+import './styles/dashboard.css';
 
 
 
 
 class Dashboard extends Component {
 
-    constructor(props)
-    {
-        super(props)
-       
-        this.state={
-            
-        }
-    }
-    logout(){
-        fire.auth().signOut()
-       
-           .then(window.location = "/");
-     
-    }
     render(){   
         const user = this.props
         return (
+           
            <div>
-               <h1>You are logged in</h1>
-               <p> Hello, {user.displayName}  </p>
-               <button onClick={this.logout}>Log Out</button>
-               <div className="note_buttons"> 
-                        <Link to="/notes/new" className="btn btn-primary">New Note </Link>
+                <Navbar />
+                <div className="container-fluid">
+                
+                    <div className=" row note_buttons"> 
+                        <Link to="/notes/new" className="btn ">New Note </Link>
                     </div>
+                    <div className="row"></div>
+                </div>
            </div>
         );
     }

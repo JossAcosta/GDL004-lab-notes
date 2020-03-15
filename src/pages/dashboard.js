@@ -15,6 +15,7 @@ class Dashboard extends Component {
     constructor(props)
     {
         super(props)
+       
         this.state={
             
         }
@@ -25,11 +26,12 @@ class Dashboard extends Component {
            .then(window.location = "/");
      
     }
-    render()
-    {
+    render(){   
+        const user = this.props
         return (
            <div>
                <h1>You are logged in</h1>
+               <p> Hello, {user.displayName}  </p>
                <button onClick={this.logout}>Log Out</button>
                <div className="note_buttons"> 
                         <Link to="/notes/new" className="btn btn-primary">New Note </Link>

@@ -41,6 +41,20 @@
     background-size: cover;
     /* background-position: 50%; */
   }
+  .login_btns{
+    display: flex;
+    justify-content: space-around;
+    align-items: center
+    
+  }
+  .login_btns img {
+    cursor: pointer;
+    padding: 10px;
+    
+  }
+  .login_btns button{
+    max-height: 40px;
+  }
   .btn {
     display: inline-block;
     min-width: 140px;

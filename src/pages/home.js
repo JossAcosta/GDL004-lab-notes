@@ -14,7 +14,7 @@ class Home extends React.Component{
     this.login = this.login.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.signup = this.signup.bind(this);
-   
+    this.signInWithGoogle =this.signInWithGoogle.bind(this);
     this.state={
       name:"",
       email:"",
@@ -24,10 +24,21 @@ class Home extends React.Component{
     
 }
 
-signInWithGoogle = (e) => {
+signInWithGoogle (e){
 e.preventDefault()
 
-    
+let googleSignInAttempt = fire.auth().signInWithPopup(provider);
+googleSignInAttempt
+    .then(result => {
+      this.props.history.push("/notes")
+     
+     
+    })
+    .catch(error => {
+      this.setState({message: error.message});
+    });
+
+
 }
 
 login(e){
@@ -43,6 +54,7 @@ login(e){
 signup(e){
   e.preventDefault();
   fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
+    this.props.history.push("/notes")
     console.log(u)
   }).catch((err)=> {
     console.log(err);
@@ -132,9 +144,9 @@ signup(e){
                         <label htmlFor="sing_pass" className="label_pass" />
                       </div>
                     </div>
-                    <input type="submit" defaultValue="Sing Up" className="btn btn_red" 
+                    <button type="submit" defaultValue="Sing Up" className="btn btn_red" 
                       onClick={this.signup}
-                      />
+                      >SIGN UP</button>
                   </div>
                 </form>
               </div>
@@ -151,20 +163,20 @@ signup(e){
                         <label htmlFor="sing_pass" className="label_mail" />
                       </div>
                       <div className="input_wrap">
-                        <input type="text" id="pass" className="input" placeholder="Password" 
+                        <input type="password" id="pass" className="input" placeholder="Password" 
                         name="password"
                         onChange ={this.handleChange}
                         value={this.state.password}/>
                         <label htmlFor="sing_pass" className="label_pass" />
                       </div>
                     </div>
-                    <a href="/" className="forgotPass">Forgot password?</a>
                    
+                    <a href="/" className="forgotPass">Forgot password?</a>
+                    <div className="login_btns">
                     <a onClick= {this.signInWithGoogle} > <img src={GoogleLogo} alt="Google Logo"/></a>
-                    <input type="submit"
-                    onClick={this.login} defaultValue="Login" className="btn btn_red" />
-                     <input type="submit" defaultValue="Sing Up" className="btn_red" 
-                    />
+                  <button type="submit"
+                    onClick={this.login} defaultValue="Login" className="btn btn_red" > LOG IN</button>
+                     </div>
                   </div>
                 </form>
               </div>

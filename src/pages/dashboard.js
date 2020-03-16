@@ -53,10 +53,12 @@ class Dashboard extends Component {
 
             {this.state.note.map((singleNote)=>{
                 return (
-                    <ul className ="single_note list-unstyled ">
-                    <li className="singleNote_title">{singleNote.title}</li>
-                    <li className="singleNote_body">{singleNote.description}</li>
-                    <li>{singleNote.author}</li>
+                    <ul className ="single_note list-unstyled "> 
+                    <Link to={`/notes/${singleNote.key}`}>
+                        <li className="singleNote_title">{singleNote.title}</li>
+                        <li className="singleNote_body">{singleNote.description}</li>
+                        <li>{singleNote.author}</li>
+                   </Link>
                     </ul>
                 )
             })}

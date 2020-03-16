@@ -1,0 +1,77 @@
+.form{
+    margin: 10px;
+}
+.title_note{
+    width: 100%;
+    height: 10vh;
+    border: 0;
+    padding: 2%;
+    font-weight: bold;
+}
+
+.body_note{
+    width: 100%;
+    height: 60vh;
+    border: 0;
+    padding: 3% 2% 0 2%;
+}
+.box{
+    box-shadow: 0 0 10px 1px rgba(39, 37, 37, 0.2);
+}
+
+.btns_actions {
+    padding-top: 2%;
+    margin-right: 1%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.btn_edit{
+    background-color:rgba(91, 211, 129, 0.891);   
+    display: inline-block;
+    min-width: 140px;
+    padding: 0 20px;
+    border-radius: 5px;
+    line-height: 31px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: bolder;
+    letter-spacing: 2px;
+    color: #fff;
+    outline: 0;
+    border: 0;
+}
+.btn_delete{
+    background-color: rgba(239, 16, 65, 0.755);
+    display: inline-block;
+    min-width: 140px;
+    padding: 0 20px;
+    border-radius: 5px;
+    line-height: 31px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: bolder;
+    letter-spacing: 2px;
+    color: #fff;
+    outline: 0;
+    border: 0;
+}
+.btn_edit:hover, .btn_delete:hover{
+   
+    color: rgba(0, 0, 0, 0.55);   
+}
+@media only screen 
+and (min-device-width: 768px) 
+and (max-device-width: 1024px) 
+and (orientation: portrait) 
+and (-webkit-min-device-pixel-ratio: 1) {
+    .body_note{
+        
+        height: 70vh;
+    
+    }
+}

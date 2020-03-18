@@ -33,12 +33,13 @@ class Dashboard extends Component {
        });
       }
      
+     
       componentDidMount() {
         this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
       }
     
     render(){   
-        const user = this.props
+        // const user = this.props
         return (
            
            <div>
@@ -49,8 +50,8 @@ class Dashboard extends Component {
                         <Link to="/notes/new" className="btn ">New Note </Link>
                     </div>
                     <div className="row">
-                    <div className="">
-
+                    <div className="list_note">
+                   
             {this.state.note.map((singleNote)=>{
                 return (
                     <ul className ="single_note list-unstyled "> 

@@ -5,7 +5,7 @@ import logo from '../images/logo.png';
 import './styles/home.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import fire from '../firebase';
-import { app } from 'firebase';
+// import { app } from 'firebase';
 import GoogleLogo from '../images/googleLogo.svg';
 import {provider} from '../firebase';
 class Home extends React.Component{
@@ -19,6 +19,7 @@ class Home extends React.Component{
       name:"",
       email:"",
       password:"",   
+      message:""
     }
 }
 
@@ -37,21 +38,44 @@ googleSignInAttempt
 
 login(e){
  e.preventDefault()
- fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+ fire.auth().signInWithEmailAndPassword(this.setState.email, this.state.password)
  .then((u)=>{
    this.props.history.push("/notes")
    console.log(u)
  }).catch((err)=> {
+  
     console.log(err);
+    throw new Error(err);
  })
 }
 signup(e){
   e.preventDefault();
+  if (this.state.email.length < 4) {
+    this.setState({message:'Please enter an email address.'});
+   
+    return;
+  }
+  if (this.state.password.length < 4) {
+    this.setState({message:'Please enter a password.'});
+   
+   
+    return;
+  }
   fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
+   
     this.props.history.push("/notes")
     console.log(u)
-  }).catch((err)=> {
-    console.log(err);
+  }).catch((error)=> {
+    console.log(error);
+    let errorCode = error.code;
+    let errorMessage = error.message;
+    if (errorCode == 'auth/weak-password') {
+      this.setState({message:'The password is too weak.'});
+      
+    } else {
+      this.setState({message: errorMessage});
+     
+    }
  });
 }
     actionHandleLogin = e => {
@@ -136,8 +160,10 @@ signup(e){
                          value={this.state.password}
                          />
                         <label htmlFor="sing_pass" className="label_pass" />
+                        <p className="text-danger">{this.state.message}</p>
                       </div>
                     </div>
+                  
                     <button type="submit" defaultValue="Sing Up" className="btn btn_red" 
                       onClick={this.signup}
                       >SIGN UP</button>
@@ -167,7 +193,7 @@ signup(e){
                    
                     <a href="/" className="forgotPass">Forgot password?</a>
                     <div className="login_btns">
-                    <a onClick= {this.signInWithGoogle} > <img src={GoogleLogo} alt="Google Logo"/></a>
+                    <a href="/" onClick= {this.signInWithGoogle} > <img src={GoogleLogo} alt="Google Logo"/></a>
                   <button type="submit"
                     onClick={this.login} defaultValue="Login" className="btn btn_red" > LOG IN</button>
                      </div>

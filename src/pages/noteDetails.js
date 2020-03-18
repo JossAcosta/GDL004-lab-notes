@@ -5,18 +5,95 @@ import firebase from '../firebase.js';
 
 class SingleNote extends Component{
    
+        constructor(props) {
+            super(props);
+            this.ref = firebase.firestore().collection('note');
+            this.unsubscribe = null;
+            this.state = {
+              note: []
+            };
+          }
+         
+          onCollectionUpdate = (querySnapshot) => {
+            const note= [];
+            querySnapshot.forEach((doc) => {
+              const { title, description, author } = doc.data();
+              note.push({
+                key: doc.id,
+                doc, // DocumentSnapshot
+                title,
+                description,
+                author,
+              });
+            });
+            this.setState({
+              note
+           });
+          }
+         
+         
+          componentDidMount() {
+            this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
+          }
+   
+     
+    
+     
+    
+     
+    //   onChange = (e) => {
+    //     const state = this.state
+    //     state[e.target.name] = e.target.value;
+    //     this.setState({singleNote:state});
+    //   }
+     
+    //   onSubmit = (e) => {
+    //     e.preventDefault();
+     
+    //     const { title, description, author } = this.state;
+     
+    //     const updateRef = firebase.firestore().collection('note').doc(this.state.key);
+    //     updateRef.set({
+    //       title,
+    //       description,
+    //       author
+    //     }).then((docRef) => {
+    //       this.setState({
+    //         key: '',
+    //         title: '',
+    //         description: '',
+    //         author: ''
+    //       });
+    //       this.props.history.push("/notes/"+this.props.match.params.id)
+    //     })
+    //     .catch((error) => {
+    //       console.error("Error adding document: ", error);
+    //     });
+    //   }
+    
    
 
 render()
 {
+    
     return(
         <div>
             <Navbar />
            
            <div className="form">
                    
-                <div className="title_note box">Title</div>
-                <div className="body_note box">body</div>
+                <div className="title_note box"
+                name="title"
+                value={this.state.title}
+                 onChange={this.onChange}>
+                   {this.setState.key}
+                </div>
+                <div className="body_note box"
+                name="description" 
+                value={this.state.note.description} 
+                onChange={this.onChange}>
+                    {this.state.title}
+                </div>
                         <div className="btns_actions">
                             <button onClick= {this.handleClick} className=" btn_edit" >Edit</button>
                         <button onClick= {this.handleClick} className=" btn_delete" >Delete</button>

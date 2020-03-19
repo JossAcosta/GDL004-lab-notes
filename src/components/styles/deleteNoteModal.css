@@ -1,0 +1,39 @@
+
+.btn_cancel{
+    background-color:rgba(91, 211, 129, 0.891);   
+    display: inline-block;
+    min-width: 140px;
+    padding: 0 20px;
+    border-radius: 5px;
+    line-height: 31px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: bolder;
+    letter-spacing: 2px;
+    color: #fff;
+    outline: 0;
+    border: 0;
+}
+.btn_delete{
+    background-color: rgba(239, 16, 65, 0.755);
+    display: inline-block;
+    min-width: 140px;
+    padding: 0 20px;
+    border-radius: 5px;
+    line-height: 31px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: bolder;
+    letter-spacing: 2px;
+    color: #fff;
+    outline: 0;
+    border: 0;
+}
+.btn_cancel:hover, .btn_delete:hover{
+   
+    color: rgba(0, 0, 0, 0.55);   
+}

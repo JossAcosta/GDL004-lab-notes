@@ -2,6 +2,8 @@ import React , { Component } from "react";
 import Navbar from '../components/navbar';
 import './styles/noteDetails.css'
 import firebase from '../firebase.js';
+import DeleteModal from '../components/deleteNoteModal';
+import Modal from '../components/modal';
 
 class SingleNote extends Component{
    
@@ -10,9 +12,22 @@ class SingleNote extends Component{
             this.ref = firebase.firestore().collection('note');
             this.unsubscribe = null;
             this.state = {
+              modalIsOpen: false,
               note: []
             };
           }
+
+          handleOpenModal = e =>{
+            this.setState({modalIsOpen: true})
+        };
+    
+        handleCloseModal = e =>{
+            this.setState({modalIsOpen: false})
+        };
+    
+        handleDeleteNote = async e =>{
+          
+        };
          
           onCollectionUpdate = (querySnapshot) => {
             const note= [];
@@ -96,7 +111,12 @@ render()
                 </div>
                         <div className="btns_actions">
                             <button onClick= {this.handleClick} className=" btn_edit" >Edit</button>
-                        <button onClick= {this.handleClick} className=" btn_delete" >Delete</button>
+                        <button onClick= {this.handleOpenModal} className=" btn_delete" >Delete</button>
+                        <DeleteModal 
+                        isOpen={this.state.modalIsOpen}
+                        onClose={this.handleCloseModal}
+                           />
+                          
                         {this.props.error &&(
                         <p className="text-danger">{this.error.message}</p>
                         )}

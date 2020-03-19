@@ -20,6 +20,7 @@ class Home extends React.Component{
       email:"",
       password:"",   
       message:""
+     
     }
 }
 
@@ -38,15 +39,35 @@ googleSignInAttempt
 
 login(e){
  e.preventDefault()
- fire.auth().signInWithEmailAndPassword(this.setState.email, this.state.password)
+
+        if (this.state.email.length < 4) {
+          this.setState({message: 'Please enter an email address.'});
+        
+          return;
+        }
+        if (this.state.password.length < 4) {
+          this.setState({message: 'Please enter a password.'});
+         
+          return;
+        }
+ fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
  .then((u)=>{
    this.props.history.push("/notes")
    console.log(u)
- }).catch((err)=> {
+ }).catch((error)=> {
+  let errorCode = error.code;
+  // let errorMessage = error.message;
+  // [START_EXCLUDE]
+  if (errorCode === 'auth/wrong-password') {
+    this.setState({message:'Wrong password.'});
+    
+  } else {
+    this.setState({message:'User has not been register'});
+    
+  }
   
-    console.log(err);
-    throw new Error(err);
  })
+
 }
 signup(e){
   e.preventDefault();
@@ -69,10 +90,11 @@ signup(e){
     console.log(error);
     let errorCode = error.code;
     let errorMessage = error.message;
-    if (errorCode == 'auth/weak-password') {
+    if (errorCode === 'auth/weak-password') {
       this.setState({message:'The password is too weak.'});
       
     } else {
+      alert(errorMessage);
       this.setState({message: errorMessage});
      
     }
@@ -188,6 +210,7 @@ signup(e){
                         onChange ={this.handleChange}
                         value={this.state.password}/>
                         <label htmlFor="sing_pass" className="label_pass" />
+                        <p className="text-danger">{this.state.message}</p>
                       </div>
                     </div>
                    

@@ -1,0 +1,37 @@
+.form{
+    margin: 10px;
+}
+.title_note{
+    width: 100%;
+    height: 10vh;
+    border: 0;
+    padding: 2%;
+    font-weight: bold;
+}
+
+.body_note{
+    width: 100%;
+    height: 60vh;
+    border: 0;
+    padding: 3% 2% 0 2%;
+}
+.box{
+    box-shadow: 0 0 10px 1px rgba(39, 37, 37, 0.2);
+}
+.btn_save {
+    margin-right: 1%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media only screen 
+and (min-device-width: 768px) 
+and (max-device-width: 1024px) 
+and (orientation: portrait) 
+and (-webkit-min-device-pixel-ratio: 1) {
+    .body_note{
+        
+        height: 70vh;
+    
+    }
+}

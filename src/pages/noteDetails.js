@@ -3,7 +3,7 @@ import Navbar from '../components/navbar';
 import './styles/noteDetails.css'
 import firebase from '../firebase.js';
 import DeleteModal from '../components/deleteNoteModal';
-import Modal from '../components/modal';
+
 
 class SingleNote extends Component{
    
@@ -15,6 +15,10 @@ class SingleNote extends Component{
               modalIsOpen: false,
               note: []
             };
+          }
+
+          handleClick = e => {
+            this.props.history.push("/notes/:noteKey/edit")
           }
 
           handleOpenModal = e =>{

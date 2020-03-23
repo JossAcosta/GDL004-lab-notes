@@ -94,7 +94,7 @@ signup(e){
       this.setState({message:'The password is too weak.'});
       
     } else {
-      alert(errorMessage);
+     
       this.setState({message: errorMessage});
      
     }

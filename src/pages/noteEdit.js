@@ -1,15 +1,19 @@
 import React , { Component } from "react";
 import Navbar from '../components/navbar';
+// import { Link } from 'react-router-dom';
 import './styles/noteDetails.css'
 import firebase from '../firebase.js';
 
 
-class NoteEdit extends Component{
 
+
+class NoteEdit extends Component{
+    
     constructor(props) {
         super(props);
         this.ref = firebase.firestore().collection('note');
         this.unsubscribe = null;
+      
         this.state = {
           modalIsOpen: false,
           note: []
@@ -44,7 +48,9 @@ render()
                     {this.state.title}
                 </div>
                 <div className="btn_save">
-                        <button onClick= {this.handleClick} className="btn " >Save</button>
+                        <button onClick= {this.handleClick} className="btn " >
+                       
+                            Save</button>
                           
                         {this.props.error &&(
                         <p className="text-danger">{this.error.message}</p>
@@ -53,6 +59,8 @@ render()
                 
            </div>
         </div>
+
+        
     )
 }
 }

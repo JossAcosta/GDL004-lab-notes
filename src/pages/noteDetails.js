@@ -3,6 +3,7 @@ import Navbar from '../components/navbar';
 import './styles/noteDetails.css'
 import firebase from '../firebase.js';
 import DeleteModal from '../components/deleteNoteModal';
+import { Link } from 'react-router-dom';
 
 
 class SingleNote extends Component{
@@ -13,10 +14,10 @@ class SingleNote extends Component{
             this.unsubscribe = null;
             this.state = {
               modalIsOpen: false,
-              note: []
+              note: null,
             };
           }
-
+        
           handleClick = e => {
             this.props.history.push("/notes/:noteKey/edit")
           }
@@ -34,63 +35,35 @@ class SingleNote extends Component{
         };
          
           onCollectionUpdate = (querySnapshot) => {
-            const note= [];
+            let note;
+            const currentUrlKey = window.location.href.split('/')[4];
             querySnapshot.forEach((doc) => {
               const { title, description, author } = doc.data();
-              note.push({
-                key: doc.id,
-                doc, // DocumentSnapshot
-                title,
-                description,
-                author,
-              });
+              if (doc.id === currentUrlKey) {
+                note = {
+                  key: doc.id,
+                  doc, // DocumentSnapshot
+                  title,
+                  description,
+                  // author,
+                };
+   
+              }
+                           
             });
+            
             this.setState({
               note
-           });
+           });   
+           console.log(this.state.note.title)    
+           console.log(this.state.note.description)   
           }
          
          
           componentDidMount() {
             this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
           }
-   
-     
     
-     
-    
-     
-    //   onChange = (e) => {
-    //     const state = this.state
-    //     state[e.target.name] = e.target.value;
-    //     this.setState({singleNote:state});
-    //   }
-     
-    //   onSubmit = (e) => {
-    //     e.preventDefault();
-     
-    //     const { title, description, author } = this.state;
-     
-    //     const updateRef = firebase.firestore().collection('note').doc(this.state.key);
-    //     updateRef.set({
-    //       title,
-    //       description,
-    //       author
-    //     }).then((docRef) => {
-    //       this.setState({
-    //         key: '',
-    //         title: '',
-    //         description: '',
-    //         author: ''
-    //       });
-    //       this.props.history.push("/notes/"+this.props.match.params.id)
-    //     })
-    //     .catch((error) => {
-    //       console.error("Error adding document: ", error);
-    //     });
-    //   }
-    
-   
 
 render()
 {
@@ -98,36 +71,31 @@ render()
     return(
         <div>
             <Navbar />
-           
-           <div className="form">
-                   
-                <div className="title_note box"
-                name="title"
-                value={this.state.title}
-                 onChange={this.onChange}>
-                   {this.setState.key}
-                </div>
-                <div className="body_note box"
-                name="description" 
-                value={this.state.note.description} 
-                onChange={this.onChange}>
-                    {this.state.title}
-                </div>
-                        <div className="btns_actions">
-                            <button onClick= {this.handleClick} className=" btn_edit" >Edit</button>
-                        <button onClick= {this.handleOpenModal} className=" btn_delete" >Delete</button>
+                  <div > hey </div>
+                  {this.state.note && (
+                    <div className="form" > 
+                    <div className="title_note box">{`${this.state.note.title}`} </div>
+                    <div className= "body_note box">{`${this.state.note.description}`}</div>
+
+                    <div className="btns_actions">
+                  <ul  className ="single_note list-unstyled " > 
+                  
+                  <Link to={`/notes/${this.state.note.key}/edit`}>
+                    {this.state.note.title}
+                  <button className=" btn_edit" >Edit</button>
+                 </Link>
+                  </ul>
+                  <button onClick= {this.handleOpenModal} className=" btn_delete" >Delete</button>
                         <DeleteModal 
                         isOpen={this.state.modalIsOpen}
                         onClose={this.handleCloseModal}
                            />
                           
-                        {this.props.error &&(
-                        <p className="text-danger">{this.error.message}</p>
-                        )}
-                    </div>
-                
-           </div>
-        </div>
+                  </div>
+                  </div>
+                  )}
+                      
+            </div>
     )
 }
 }

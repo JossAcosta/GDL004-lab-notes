@@ -20,8 +20,12 @@
 }
 .btn_save {
     margin-right: 1%;
+   
     display: flex;
     justify-content: flex-end;
+}
+.btn{
+    margin-top:2%;
 }
 
 @media only screen 

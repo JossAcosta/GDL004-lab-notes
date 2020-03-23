@@ -34,11 +34,7 @@ authListener(){
 }
 render(){
     return(
-        // <div>
-        //     {this.state.user ? (<Dashboard />) : (<Home/>)}
-        // </div>
-        
-       
+     
         <div><BrowserRouter>
      
      <Switch>

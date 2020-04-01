@@ -20,10 +20,9 @@ class SingleNote extends Component {
         const note= [];
         querySnapshot.forEach((doc) => {
           const { title, description, author } = doc.data();
-          
           note.push({
             key: doc.id,
-            doc, // DocumentSnapshot
+            doc, 
             title,
             description,
             author,

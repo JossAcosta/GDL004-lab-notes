@@ -55,8 +55,7 @@ class SingleNote extends Component{
             this.setState({
               note
            });   
-           console.log(this.state.note.title)    
-           console.log(this.state.note.description)   
+          
           }
          
          
@@ -71,7 +70,7 @@ render()
     return(
         <div>
             <Navbar />
-                  <div > hey </div>
+                 
                   {this.state.note && (
                     <div className="form" > 
                     <div className="title_note box">{`${this.state.note.title}`} </div>
@@ -81,7 +80,7 @@ render()
                   <ul  className ="single_note list-unstyled " > 
                   
                   <Link to={`/notes/${this.state.note.key}/edit`}>
-                    {this.state.note.title}
+                  
                   <button className=" btn_edit" >Edit</button>
                  </Link>
                   </ul>

@@ -20,7 +20,7 @@ class Dashboard extends Component {
                 <div className="container">
                 
                     <div className=" row note_buttons"> 
-                        <Link to="/notes/new" className="btn ">New Note </Link>
+                        <Link to="/notes/new" className="btn ">New Note :3 </Link>
                     </div>
                     <SingleNote/>
                <div>

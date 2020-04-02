@@ -5,26 +5,21 @@ import './styles/noteDetails.css'
 import firebase from '../firebase.js';
 import { withRouter } from "react-router-dom";
 
-
-
-
-
 class NoteEdit extends Component{
     
     constructor(props) {
         super(props);
         this.ref = firebase.firestore().collection('note');
-        this.onSubmit= this.onSubmit.bind(this);
         this.unsubscribe = null;
         this.state = {
           modalIsOpen: false,
-          note: null,
-          key: null,
-          title: '',
-          description: '',
+          note: {
+            title: '',
+            description: ''
+          },
+          key: null
         };
       }
-
 
       onCollectionUpdate = (querySnapshot) => {
         let note;
@@ -44,48 +39,38 @@ class NoteEdit extends Component{
         this.setState({
           note
        });   
-       console.log(this.state.note.title)    
-       console.log(this.state.note.description)   
       }
     
-      
       onChange = (e) => {
-        const state = this.state
-        state[e.target.name] = e.target.value;
-        this.setState({note:state});
+        const note = this.state.note
+        note[e.target.name] = e.target.value;
+        this.setState({note:note});
       }
 
-      onSubmit = (e) => {
+      handleClick = (e) => {
         e.preventDefault();
-        const { title, description} = this.state;
+        const { title, description} = this.state.note;
         const id =window.location.href.split('/')[4];
         let noteRef = firebase.firestore().collection("note").doc(id);
-        return noteRef.update({
+        noteRef.update({
           title,
           description,
           
         })
-        .then(function() {
+        .then(() => {
             console.log("Document successfully updated!");
       this.props.history.push('/notes')
-        
         })
-        .catch(function(error) {
-            // The document probably doesn't exist.
+        .catch((error) =>{
+           
             console.error("Error updating document: ", error);
         });
-    //  console.log(firebase.firestore().collection("note").doc(id)
-    //  .onSnapshot(function(doc){
-    //      console.log("Current data: ", doc.data());
-    //  }));
 
       }
-      
-      
 
-    handleClick = e => {
+     /*handleClick = e => {
         this.props.history.push("/notes")
-      }
+      }*/
       componentDidMount() {
         this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);  
       }
@@ -99,7 +84,7 @@ render()
            
             {this.state.note && (
 
-                    <form onSubmit={this.onSubmit}>
+                    <form>
                     <div className="form">
                         {/* <label>Title</label> */}
                         <input 
@@ -124,7 +109,7 @@ render()
                         
                     </div>
                     <div className="btn_save">
-                    <button  type="submit"
+                    <button
                      onClick= {this.handleClick}
                       className="btn " 
                       

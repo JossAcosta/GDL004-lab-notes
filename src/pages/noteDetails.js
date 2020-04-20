@@ -15,6 +15,7 @@ class SingleNote extends Component{
             this.state = {
               modalIsOpen: false,
               note: null,
+              user:{ },
             };
           }
         
@@ -35,13 +36,14 @@ class SingleNote extends Component{
             const currentUrlKey = window.location.href.split('/')[4];
 
             querySnapshot.forEach((doc) => {
-              const { title, description} = doc.data();
+              const { title, description,  author, important } = doc.data();
               if (doc.id === currentUrlKey) {
                 note = {
                   key: doc.id,
                   doc,
                   title,
                   description,
+                  author, important 
                 };
               }            
             });

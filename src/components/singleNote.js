@@ -10,10 +10,21 @@ class SingleNote extends Component {
         this.unsubscribe = null;
         this.state = {
           note: [],
-          active: false,
-          
+          user:{},
+          currentUser:'',
         };
       }
+      authListener(props){
+        firebase.auth().onAuthStateChanged((user)=>{
+            if(user){
+              this.setState({user})
+              const currentUserEmail = this.state.user.email;
+             this.setState({currentUser: currentUserEmail})
+            } else {
+                this.setState({user:null})
+            }
+        })
+    }
      
       onCollectionUpdate = (querySnapshot) => {
         const note= [];
@@ -32,34 +43,32 @@ class SingleNote extends Component {
           note
        });
       }
-      important = (id, important) => {
-        
-        console.log(id, important)
-        for (const property in this.state.note) {
-         const single = this.state.note[property];
-         
-         if (single.key == id){
-          const vip = single.important
-          this.setState ({single: {important:true}})
-          console.log(this.state)
-         }
-         
-        //  console.log(single.key, single.important)
 
+      important = (id, important) => {
+        let noteRef = firebase.firestore().collection("notes").doc(id);
+        if(important === false){
+          noteRef.update({
+            important: true,
+          })
+        } else {
+          noteRef.update({
+            important: false,
+          })
         }
-        // const currentState = this.state.active;
-        // this.setState({ active: !currentState });
-        // const noteImportant = this.state.note
-       
-        // console.log(noteImportant,'no hay')
-       
-      }
+        }
+
       componentDidMount() {
         this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
+        this.authListener();
       }
+      
       componentWillUnmount() {
         this.unsubscribe();
+
       }
+
+
+
     render(){   
         return (
                     <div className="row">
@@ -67,10 +76,10 @@ class SingleNote extends Component {
                   
             {this.state.note.map((singleNote, index)=>{
                 return (
-                  <ul   key={index} className= { this.state.active ? "active": "single_note"}> 
+                  <ul   key={index} id={singleNote.important ? "active": `${singleNote.key}`} className="single_note "> 
                  
                   <button onClick={()=>this.important(singleNote.key, singleNote.important)} className="star-button"  style={{outline: 'none'}}>
-                       <span><i className="fas fa-star"></i></span> 
+                       <span ><i className="fas fa-star"></i></span> 
                         </button>
                     <Link to={`/notes/${singleNote.key}`} style={{textDecoration: 'none', color:'rgba(0, 0, 0, 0.7)'}}>
                         <li  className="container_list">

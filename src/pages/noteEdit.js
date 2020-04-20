@@ -52,7 +52,7 @@ class NoteEdit extends Component{
         e.preventDefault();
         const { title, description, author, important } = this.state.note;
         const id =window.location.href.split('/')[4];
-        let noteRef = firebase.firestore().collection("note").doc(id);
+        let noteRef = firebase.firestore().collection("notes").doc(id);
         noteRef.update({
           title,
           description,

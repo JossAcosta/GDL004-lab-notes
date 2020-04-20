@@ -8,12 +8,14 @@ import fire from '../firebase.js';
 
 class Navbar extends React.Component {
 
-    constructor(props)
-    {
+    constructor(props){
         super(props)
+       
         this.state={ }
     }
+
     logout(){
+        
         fire.auth().signOut()   
            .then(window.location = "/");
     }
@@ -21,11 +23,15 @@ class Navbar extends React.Component {
         return <div  className="navbar">
         <div className="container-fluid">
             <Link to="/notes">
-                <img src={logo} alt="Logo"/>
-                <span className="font-weigth-ligth title_navabar">L A B</span>
-                <span className="font-weigth-bold title_navabar"> n o t e s !</span>
+                <div  className="navbar_logo-title">
+                    <img src={logo} alt="Logo"/>
+                   
+                <span className="font-weigth-ligth title_LAB">L A B      </span>
+                <span className="font-weigth-bold title_notes">   N O T E S !</span>
+                </div>
+                
             </Link>
-            <button onClick={this.logout} className="btn btn_red">Log Out</button>
+            <button onClick={this.logout} className="btn-logOut">Log Out <span className="fas fa-sign-out-alt"></span></button>
             </div>
         </div>;
     }

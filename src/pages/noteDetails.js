@@ -10,7 +10,7 @@ class SingleNote extends Component{
    
         constructor(props) {
             super(props);
-            this.ref = firebase.firestore().collection('note');
+            this.ref = firebase.firestore().collection('notes');
             this.unsubscribe = null;
             this.state = {
               modalIsOpen: false,
@@ -18,49 +18,45 @@ class SingleNote extends Component{
             };
           }
         
-          handleClick = e => {
+        handleClick = e => {
             this.props.history.push("/notes/:noteKey/edit")
-          }
+        }
 
-          handleOpenModal = e =>{
+        handleOpenModal = e =>{
             this.setState({modalIsOpen: true})
         };
     
         handleCloseModal = e =>{
             this.setState({modalIsOpen: false})
         };
-    
-        handleDeleteNote = async e =>{
-          
-        };
          
           onCollectionUpdate = (querySnapshot) => {
             let note;
             const currentUrlKey = window.location.href.split('/')[4];
+
             querySnapshot.forEach((doc) => {
-              const { title, description, author } = doc.data();
+              const { title, description} = doc.data();
               if (doc.id === currentUrlKey) {
                 note = {
                   key: doc.id,
-                  doc, // DocumentSnapshot
+                  doc,
                   title,
                   description,
-                  // author,
                 };
-   
-              }
-                           
+              }            
             });
-            
             this.setState({
               note
            });   
-          
           }
-         
-         
           componentDidMount() {
-            this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
+            this.unsubscribe = 
+            
+            this.ref.onSnapshot(this.onCollectionUpdate);
+          }
+
+          componentWillUnmount() {
+            this.unsubscribe();
           }
     
 
@@ -77,24 +73,22 @@ render()
                     <div className= "body_note box">{`${this.state.note.description}`}</div>
 
                     <div className="btns_actions">
-                  <ul  className ="single_note list-unstyled " > 
                   
-                  <Link to={`/notes/${this.state.note.key}/edit`}>
-                  
-                  <button className=" btn_edit" >Edit</button>
-                 </Link>
-                  </ul>
-                  <button onClick= {this.handleOpenModal} className=" btn_delete" >Delete</button>
+                      <Link to={`/notes/${this.state.note.key}/edit`}>
+                      <button className=" btn_edit" >Edit</button>
+                      </Link>
+                      
+                      <button onClick= {this.handleOpenModal} className=" btn_delete">Delete</button>
                         <DeleteModal 
                         isOpen={this.state.modalIsOpen}
                         onClose={this.handleCloseModal}
                            />
                           
-                  </div>
-                  </div>
+                    </div>
+                    </div>
                   )}
                       
-            </div>
+         </div>
     )
 }
 }

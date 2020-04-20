@@ -17,15 +17,13 @@ class Dashboard extends Component {
            <div className="body_dashboard"> 
                 <Navbar />
                 
-                <div className="container">
+                <div className="container-fluid">
                 
                     <div className=" row note_buttons"> 
-                        <Link to="/notes/new" className="btn ">New Note :3 </Link>
+                        <Link to="/notes/new" className="btn ">New Note</Link>
                     </div>
                     <SingleNote/>
-               <div>
-                   Soy el footer
-               </div>
+              
                 </div>
            </div>
         );

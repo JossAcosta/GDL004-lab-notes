@@ -8,15 +8,19 @@ function DeleteNoteModal (props){
     const history = useHistory();
     const onDeleteNote =()=>{
         let id = window.location.href.split('/')[4];
-     
-        console.log(id);
-        firebase.firestore().collection('note').doc(id).delete();
-        console.log('Succeful delete');
-        history.push("/notes")
+        firebase.firestore().collection('notes').doc(id).delete()
+        .then(() => {
+            console.log('Succeful delete');
+            history.push("/notes")
+        })
+        .catch((error) =>{
+            console.error("Error delete document: ", error);
+        });
+       
     }
    return <Modal isOpen={props.isOpen} onClose={props.onClose}>
-        <div className="DeleteNoteModal">
-            <h1>Are you Sure?</h1>
+        <div className="deleteNoteModal">
+            <h1>Are you sure?</h1>
             <p>You are about to delete this note</p>
         </div>
         <div>

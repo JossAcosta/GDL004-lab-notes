@@ -1,5 +1,5 @@
 .form{
-    margin: 10px;
+    margin: 5px 10px;
 }
 .untitle_note{
     width: 100%;
@@ -12,7 +12,7 @@
     width: 100%;
     height: 60vh;
     border: 0;
-    padding: 3% 2% 0 2%;
+    padding: 2% 2% 0 2%;
 }
 .box{
     box-shadow: 0 0 10px 1px rgba(39, 37, 37, 0.2);

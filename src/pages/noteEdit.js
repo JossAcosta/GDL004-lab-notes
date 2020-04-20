@@ -1,23 +1,23 @@
 import React , { Component } from "react";
 import Navbar from '../components/navbar';
-// import { Link } from 'react-router-dom';
-import './styles/noteDetails.css'
+import './styles/noteEdit.css'
 import firebase from '../firebase.js';
-import { withRouter } from "react-router-dom";
+
 
 class NoteEdit extends Component{
-    
+
     constructor(props) {
         super(props);
-        this.ref = firebase.firestore().collection('note');
+        this.ref = firebase.firestore().collection('notes');
         this.unsubscribe = null;
         this.state = {
           modalIsOpen: false,
           note: {
             title: '',
-            description: ''
+            description: '',
+            author:'',
+            important: false,
           },
-          key: null
         };
       }
 
@@ -25,14 +25,15 @@ class NoteEdit extends Component{
         let note;
         const currentUrlKey = window.location.href.split('/')[4];
         querySnapshot.forEach((doc) => {
-          const { title, description} = doc.data();
+          const { title, description, author, important } = doc.data();
           if (doc.id === currentUrlKey) {
             note = {
               key: doc.id,
-              doc, // DocumentSnapshot
+              doc,
               title,
               description,
-              // author,
+              author, 
+              important, 
             };
           }                    
         });
@@ -42,37 +43,37 @@ class NoteEdit extends Component{
       }
     
       onChange = (e) => {
-        const note = this.state.note
-        note[e.target.name] = e.target.value;
-        this.setState({note:note});
+        const newNote = { ...this.state.note }
+        newNote[e.target.name] = e.target.value;
+        this.setState({note: newNote});
       }
 
       handleClick = (e) => {
         e.preventDefault();
-        const { title, description} = this.state.note;
+        const { title, description, author, important } = this.state.note;
         const id =window.location.href.split('/')[4];
         let noteRef = firebase.firestore().collection("note").doc(id);
         noteRef.update({
           title,
           description,
-          
+          author,
+          important,
         })
         .then(() => {
             console.log("Document successfully updated!");
       this.props.history.push('/notes')
         })
         .catch((error) =>{
-           
             console.error("Error updating document: ", error);
         });
-
       }
 
-     /*handleClick = e => {
-        this.props.history.push("/notes")
-      }*/
       componentDidMount() {
         this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);  
+      }
+
+      componentWillUnmount() {
+        this.unsubscribe();
       }
 
 render()
@@ -84,21 +85,18 @@ render()
            
             {this.state.note && (
 
-                    <form>
-                    <div className="form">
-                        {/* <label>Title</label> */}
+                    <form className="form">
+                    <div className=" ">
                         <input 
                         onChange= {this.onChange} 
-                        className="untitle_note box" 
+                        className="title_note box" 
                         type="text" 
                         name="title" 
-                        // placeholder="Untitled . . ."
                         value= {this.state.note.title}
                         />
                             
                     </div>
-                    <div className="form">
-                        {/* <label>Note</label> */}
+                    <div className="">
                         <textarea 
                         onChange={this.onChange}
                         className="body_note box" 
@@ -109,24 +107,19 @@ render()
                         
                     </div>
                     <div className="btn_save">
-                    <button
-                     onClick= {this.handleClick}
-                      className="btn " 
-                      
-
-                      >Save</button>
+                        <button
+                        onClick= {this.handleClick}
+                        className="btn "
+                        >
+                        Save
+                        </button>
                     {this.props.error &&(
                     <p className="text-danger">{this.error.message}</p>
                     )}
                     </div>
-                    </form>
-                   
+                    </form>               
                   )}
-              
-                
            </div>
-       
-        
     )
 }
 }

@@ -1,13 +1,11 @@
 import React from 'react';
 import logo from '../images/logo.png';
-// import LoginWithGoogle from '../model/auth/authWithGoogle';
-
 import './styles/home.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import fire from '../firebase';
-// import { app } from 'firebase';
 import GoogleLogo from '../images/googleLogo.svg';
 import {provider} from '../firebase';
+
 class Home extends React.Component{
   constructor(props) {
     super(props);
@@ -51,9 +49,8 @@ login(e){
           return;
         }
  fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
- .then((u)=>{
+ .then(()=>{
    this.props.history.push("/notes")
-   console.log(u)
  }).catch((error)=> {
   let errorCode = error.code;
   // let errorMessage = error.message;

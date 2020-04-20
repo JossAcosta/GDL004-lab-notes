@@ -8,11 +8,12 @@ class NewNote extends Component{
      
   constructor() {
     super();
-    this.ref = firebase.firestore().collection('note');
+    this.ref = firebase.firestore().collection('notes');
     this.state = {
       title: '',
       description: '',
-      author: ''
+      author: '',
+      important: false, 
     };
   }
   onChange = (e) => {
@@ -24,17 +25,19 @@ class NewNote extends Component{
   onSubmit = (e) => {
     e.preventDefault();
  
-    const { title, description, author } = this.state;
+    const { title, description, author, important } = this.state;
  
     this.ref.add({
       title,
       description,
-      author
+      author, 
+      important,
     }).then((docRef) => {
       this.setState({
         title: '',
         description: '',
-        author: ''
+        author: '',
+        important
       });
       this.props.history.push("/notes")
     })

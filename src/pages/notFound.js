@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import Navbar from '../components/navbar';
 import './styles/dashboard.css';
-import SingleNote from '../components/singleNote';
+
 
 class NotFound extends Component {
    

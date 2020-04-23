@@ -82,9 +82,7 @@ signup(e){
   fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
   .then((u)=>{
     // db.doCreateUser(u.uid, username, email).then(() => {
-      //you should clear your state fields here, for username / email etc
       console.log(u);
-      //redirect user
       this.props.history.push("/notes")
     // });
 

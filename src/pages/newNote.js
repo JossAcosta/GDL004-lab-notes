@@ -14,6 +14,8 @@ class NewNote extends Component{
       description: '',
       author: '',
       important: false, 
+      user:{},
+      currentUser:'',
     };
   }
   onChange = (e) => {
@@ -30,13 +32,13 @@ class NewNote extends Component{
     this.ref.add({
       title,
       description,
-      author, 
+      author: this.state.currentUser, 
       important,
     }).then((docRef) => {
       this.setState({
         title: '',
         description: '',
-        author: '',
+        author,
         important
       });
       this.props.history.push("/notes")
@@ -44,6 +46,19 @@ class NewNote extends Component{
     .catch((error) => {
       console.error("Error adding document: ", error);
     });
+  }
+
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged((user)=>{
+      if(user){
+        this.setState({user})
+        const currentUserEmail = this.state.user.email;
+       this.setState({currentUser: currentUserEmail})
+      
+      } else {
+          this.setState({user:null})
+      }
+  })
   }
 
 render()

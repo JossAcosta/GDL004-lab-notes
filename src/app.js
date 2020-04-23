@@ -7,6 +7,7 @@ import Dashboard from './pages/dashboard';
 import NewNote from './pages/newNote';
 import SingleNote from './pages/noteDetails';
 import NoteEdit from './pages/noteEdit';
+import NotFound from './pages/notFound';
 
 class App extends Component{
     constructor(props){
@@ -42,11 +43,11 @@ render(){
           : ( <Route exact path = "/" component = {Home} />)
              }
        
-           <Route exact path = "/notes" component = {Dashboard} />
+           {/*<Route exact path = "/notes" component = {Dashboard} />*/}
            <Route exact path="/notes/new" component={NewNote} />
            <Route exact path="/notes/:noteKey" component={SingleNote} />
            <Route exact path="/notes/:noteKey/edit" component={NoteEdit} />
-           {/* <Route path= "#" component={NotFound} /> */}
+           <Route path= "/example" component={NotFound} />
       
        </Switch>
       

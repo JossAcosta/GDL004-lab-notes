@@ -3,6 +3,7 @@ import logo from '../images/logo.png';
 import './styles/home.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import fire from '../firebase';
+import db from '../firebase';
 import GoogleLogo from '../images/googleLogo.svg';
 import {provider} from '../firebase';
 
@@ -14,6 +15,7 @@ class Home extends React.Component{
     this.signup = this.signup.bind(this);
     this.signInWithGoogle =this.signInWithGoogle.bind(this);
     this.state={
+      username: "",
       name:"",
       email:"",
       password:"",   
@@ -50,6 +52,7 @@ login(e){
         }
  fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
  .then(()=>{
+   
    this.props.history.push("/notes")
  }).catch((error)=> {
   let errorCode = error.code;
@@ -70,33 +73,40 @@ signup(e){
   e.preventDefault();
   if (this.state.email.length < 4) {
     this.setState({message:'Please enter an email address.'});
-   
     return;
   }
   if (this.state.password.length < 4) {
     this.setState({message:'Please enter a password.'});
-   
-   
     return;
   }
-  fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
-   
-    this.props.history.push("/notes")
-    console.log(u)
+  fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+  .then((u)=>{
+    // db.doCreateUser(u.uid, username, email).then(() => {
+      //you should clear your state fields here, for username / email etc
+      console.log(u);
+      //redirect user
+      this.props.history.push("/notes")
+    // });
+
   }).catch((error)=> {
     console.log(error);
     let errorCode = error.code;
     let errorMessage = error.message;
     if (errorCode === 'auth/weak-password') {
       this.setState({message:'The password is too weak.'});
-      
     } else {
-     
       this.setState({message: errorMessage});
      
     }
  });
 }
+    doCreateUser = (id, username, email) =>
+    db.ref(`users/${id}`).set({
+      uid:id,
+      username,
+      email,
+    });
+  
     actionHandleLogin = e => {
         const wrap = document.getElementById('main');
         wrap.classList.remove("singUpActive");

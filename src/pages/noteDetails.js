@@ -2,6 +2,7 @@ import React , { Component } from "react";
 import Navbar from '../components/navbar';
 import './styles/noteDetails.css'
 import firebase from '../firebase.js';
+
 import DeleteModal from '../components/deleteNoteModal';
 import { Link } from 'react-router-dom';
 

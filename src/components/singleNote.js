@@ -14,34 +14,40 @@ class SingleNote extends Component {
           currentUser:'',
         };
       }
-      authListener(props){
+
+      onCollectionUpdateFilter = (querySnapshot) => {
         firebase.auth().onAuthStateChanged((user)=>{
-            if(user){
-              this.setState({user})
-              const currentUserEmail = this.state.user.email;
-             this.setState({currentUser: currentUserEmail})
-            } else {
-                this.setState({user:null})
-            }
-        })
-    }
-     
-      onCollectionUpdate = (querySnapshot) => {
-        const note= [];
-        querySnapshot.forEach((doc) => {
-          const { title, description, author, important } = doc.data();
-          note.push({
-            key: doc.id,
-            doc, 
-            title,
-            description,
-            author, 
-            important,
+          if(user){
+            this.setState({user})
+            const currentUserEmail = this.state.user.email;
+           this.setState({currentUser: currentUserEmail})
+           const note= [];
+      this.ref.where("author", "==", this.state.currentUser)
+      .get()
+      .then(
+          function(querySnapshot) {
+          querySnapshot.forEach(function(doc) {
+            console.log(doc.id, " => ", doc.data());
+            const { title, description, author, important } = doc.data();
+            note.push({
+              key: doc.id,
+              doc, 
+              title,
+              description,
+              author, 
+              important,
+            });
           });
-        });
-        this.setState({
-          note
-       });
+          this.setState({ note });
+      }.bind(this))
+      .catch(function(error) {
+          console.log("Error getting documents: ", error);
+      });
+          } else {
+              this.setState({user:null})
+          }
+      })
+  
       }
 
       important = (id, important) => {
@@ -58,8 +64,7 @@ class SingleNote extends Component {
         }
 
       componentDidMount() {
-        this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
-        this.authListener();
+        this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdateFilter);
       }
       
       componentWillUnmount() {
@@ -67,37 +72,33 @@ class SingleNote extends Component {
 
       }
 
-
-
-    render(){   
+    render(){ 
         return (
-                    <div className="row">
-                    <div className="list_note">
-                  
-            {this.state.note.map((singleNote, index)=>{
+            <div className="row">
+            <div className="list_note">
+                    {this.state.currentUser ?(
+                        <p className="singleNote_title">User Email: {this.state.currentUser}</p>
+                    ) : (<p className="singleNote_title">Loading . . . </p>) } 
+                {this.state.note.map((singleNote, index)=>{
                 return (
-                  <ul   key={index} id={singleNote.important ? "active": `${singleNote.key}`} className="single_note "> 
-                 
+                <ul   key={index} id={singleNote.important ? "active": null} className="single_note "> 
                   <button onClick={()=>this.important(singleNote.key, singleNote.important)} className="star-button"  style={{outline: 'none'}}>
                        <span ><i className="fas fa-star"></i></span> 
-                        </button>
+                  </button>
                     <Link to={`/notes/${singleNote.key}`} style={{textDecoration: 'none', color:'rgba(0, 0, 0, 0.7)'}}>
                         <li  className="container_list">
                          <div className="singleNote_title">
-                       <p> {singleNote.title} </p>
-                        
+                           <p> {singleNote.title} </p>
                           </div>  
                         <p   className="singleNote_body">{singleNote.description}</p>
-                        
                         </li>
-                        
-                        </Link>
-                       
-                    </ul>
+                    </Link>   
+                </ul>
                 )
-            })}
-        </div>
-                    </div>
+            })
+            }
+            </div>
+            </div>
         );
     }
 }

@@ -6,12 +6,10 @@ import './styles/dashboard.css';
 
 import SingleNote from '../components/singleNote';
 
-
-
 class Dashboard extends Component {
 
     render(){   
-       
+        const { currentUser } = this.props;
         return (
            
            <div className="body_dashboard"> 
@@ -22,7 +20,7 @@ class Dashboard extends Component {
                     <div className=" row note_buttons"> 
                         <Link to="/notes/new" className="btn ">New Note</Link>
                     </div>
-                    <SingleNote/>
+                    <SingleNote currentUser={currentUser} />
               
                 </div>
            </div>

@@ -16,39 +16,36 @@ class SingleNote extends Component {
       }
 
       onCollectionUpdateFilter = (querySnapshot) => {
-        firebase.auth().onAuthStateChanged((user)=>{
-          if(user){
-            this.setState({user})
-            const currentUserEmail = this.state.user.email;
-           this.setState({currentUser: currentUserEmail})
-           const note= [];
-      this.ref.where("author", "==", this.state.currentUser)
-      .get()
-      .then(
-          function(querySnapshot) {
-          querySnapshot.forEach(function(doc) {
-            console.log(doc.id, " => ", doc.data());
-            const { title, description, author, important } = doc.data();
-            note.push({
-              key: doc.id,
-              doc, 
-              title,
-              description,
-              author, 
-              important,
-            });
-          });
-          this.setState({ note });
-      }.bind(this))
-      .catch(function(error) {
-          console.log("Error getting documents: ", error);
-      });
-          } else {
-              this.setState({user:null})
+          	const { currentUser } = this.props;
+            const note = [];
+            this.ref.where("author", "==", currentUser.email)
+              .get()
+              .then(
+                function (querySnapshot) {
+                  querySnapshot.forEach(function (doc) {
+                    const {
+                      title,
+                      description,
+                      author,
+                      important
+                    } = doc.data();
+                    note.push({
+                      key: doc.id,
+                      doc,
+                      title,
+                      description,
+                      author,
+                      important,
+                    });
+                  });
+                  this.setState({
+                    note
+                  });
+                }.bind(this))
+              .catch(function (error) {
+                console.log("Error getting documents: ", error);
+              });
           }
-      })
-  
-      }
 
       important = (id, important) => {
         let noteRef = firebase.firestore().collection("notes").doc(id);
@@ -72,31 +69,31 @@ class SingleNote extends Component {
 
       }
 
-    render(){ 
+    render(){
+      const { currentUser } = this.props;
         return (
-            <div className="row">
+          <div className="row">
             <div className="list_note">
-                    {this.state.currentUser ?(
-                        <p className="singleNote_title">User Email: {this.state.currentUser}</p>
-                    ) : (<p className="singleNote_title">Loading . . . </p>) } 
+              {currentUser
+                ? (<p className="singleNote_title">User Email: {currentUser.email}</p>)
+                : (<p>Loading . . .</p>) } 
                 {this.state.note.map((singleNote, index)=>{
-                return (
-                <ul   key={index} id={singleNote.important ? "active": null} className="single_note "> 
-                  <button onClick={()=>this.important(singleNote.key, singleNote.important)} className="star-button"  style={{outline: 'none'}}>
-                       <span ><i className="fas fa-star"></i></span> 
-                  </button>
-                    <Link to={`/notes/${singleNote.key}`} style={{textDecoration: 'none', color:'rgba(0, 0, 0, 0.7)'}}>
-                        <li  className="container_list">
-                         <div className="singleNote_title">
-                           <p> {singleNote.title} </p>
-                          </div>  
-                        <p   className="singleNote_body">{singleNote.description}</p>
-                        </li>
-                    </Link>   
-                </ul>
-                )
-            })
-            }
+                  return (
+                    <ul   key={index} id={singleNote.important ? "active": null} className="single_note "> 
+                    <button onClick={()=>this.important(singleNote.key, singleNote.important)} className="star-button"  style={{outline: 'none'}}>
+                        <span ><i className="fas fa-star"></i></span> 
+                    </button>
+                      <Link to={`/notes/${singleNote.key}`} style={{textDecoration: 'none', color:'rgba(0, 0, 0, 0.7)'}}>
+                          <li  className="container_list">
+                          <div className="singleNote_title">
+                            <p> {singleNote.title} </p>
+                            </div>  
+                          <p   className="singleNote_body">{singleNote.description}</p>
+                          </li>
+                      </Link>   
+                  </ul>
+                  )
+                })}
             </div>
             </div>
         );

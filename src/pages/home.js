@@ -82,12 +82,10 @@ signup(e){
   fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
   .then((u)=>{
     // db.doCreateUser(u.uid, username, email).then(() => {
-      console.log(u);
       this.props.history.push("/notes")
     // });
 
   }).catch((error)=> {
-    console.log(error);
     let errorCode = error.code;
     let errorMessage = error.message;
     if (errorCode === 'auth/weak-password') {

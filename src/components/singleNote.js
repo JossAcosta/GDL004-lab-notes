@@ -12,10 +12,12 @@ class SingleNote extends Component {
           note: [],
           user:{},
           currentUser:'',
+          noteKey:'',
         };
       }
 
       onCollectionUpdateFilter = (querySnapshot) => {
+       
           	const { currentUser } = this.props;
             const note = [];
             this.ref.where("author", "==", currentUser.email)
@@ -68,6 +70,7 @@ class SingleNote extends Component {
         this.unsubscribe();
 
       }
+      
 
     render(){
       const { currentUser } = this.props;
@@ -83,7 +86,14 @@ class SingleNote extends Component {
                     <button onClick={()=>this.important(singleNote.key, singleNote.important)} className="star-button"  style={{outline: 'none'}}>
                         <span ><i className="fas fa-star"></i></span> 
                     </button>
-                      <Link to={`/notes/${singleNote.key}`} style={{textDecoration: 'none', color:'rgba(0, 0, 0, 0.7)'}}>
+                      <Link to= 
+                      {{
+                        pathname:`/${singleNote.key}`,
+                        state: {
+                            noteKey: singleNote.key
+                        }
+                    }}
+                      style={{textDecoration: 'none', color:'rgba(0, 0, 0, 0.7)'}}>
                           <li  className="container_list">
                           <div className="singleNote_title">
                             <p> {singleNote.title} </p>

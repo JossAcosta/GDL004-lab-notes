@@ -71,25 +71,22 @@ render()
                 
                 <form onSubmit={this.onSubmit}>
                     <div className="form">
-                        {/* <label>Title</label> */}
+                       
                         <input 
                         onChange= {this.onChange} 
                         className="untitle_note box" 
                         type="text" 
                         name="title" 
                         placeholder="Untitled . . ."
-                        // value= {this.props.formValues.titleNote} 
                         />
                     </div>
                     <div className="form">
-                        {/* <label>Note</label> */}
                         <textarea 
                         onChange={this.onChange}
                         className="body_note box" 
                         type="text" 
                         name="description" 
                         placeholder="Write your note . . ."
-                        // value={this.props.formValues.bodyNote}
                         />
                     </div>
                     <div className="btn_save">

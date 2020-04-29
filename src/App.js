@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { HashRouter, Switch, Route } from 'react-router-dom';
 
 import fire from './firebase';
 import Home from './pages/home';
@@ -36,23 +36,24 @@ render(){
     return(
      
         <div>
-            <BrowserRouter  >
+            <HashRouter  >
      
      <Switch>
             {this.state.user ?
-            (<Route exact path = "/notes" render = {(props) => (
+            (<Route  path = "/notes" render = {(props) => (
                 <Dashboard {...props} currentUser={this.state.user} />
             )} />)
-          : ( <Route exact path = "/" component = {Home} />)
+          : ( <Route  path = "/" component = {Home} />)
              }
-           <Route exact path="/notes/new" component={NewNote} />
-           <Route exact path="/notes/:noteKey" component={NoteDetails} />
-           <Route exact path="/notes/:noteKey/edit" component={NoteEdit} />
-           <Route component={NotFound} />
+           <Route exact  path="/new" component={NewNote} />
+           <Route exact   path="/edit" component={NoteEdit} />
+           <Route exact   path="/:noteKey" component={NoteDetails} />
+          
+           <Route exact   path="/example"component={NotFound} />
       
        </Switch>
       
-</BrowserRouter>
+</HashRouter>
       </div>  
 
     );

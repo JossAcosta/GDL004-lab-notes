@@ -16,9 +16,9 @@ class Dashboard extends Component {
                 <Navbar />
                 
                 <div className="container-fluid">
-                
+               
                     <div className=" row note_buttons"> 
-                        <Link to="/notes/new" className="btn ">New Note</Link>
+                        <Link to="/new" className="btn ">New Note</Link>
                     </div>
                     <SingleNote currentUser={currentUser} />
               

@@ -11,6 +11,7 @@ class NoteEdit extends Component{
         this.ref = firebase.firestore().collection('notes');
         this.unsubscribe = null;
         this.state = {
+          noteKey: '',
           modalIsOpen: false,
           note: {
             title: '',
@@ -22,8 +23,12 @@ class NoteEdit extends Component{
       }
 
       onCollectionUpdate = (querySnapshot) => {
+    
         let note;
-        const currentUrlKey = window.location.href.split('/')[4];
+        const currentUrlKey = this.props.location.state.noteKey;
+        // const currentUrlKey = window.location.href.split('/')[5];
+        console.log( window.location.href.split('/'))
+
         querySnapshot.forEach((doc) => {
           const { title, description, author, important } = doc.data();
           if (doc.id === currentUrlKey) {
@@ -51,7 +56,8 @@ class NoteEdit extends Component{
       handleClick = (e) => {
         e.preventDefault();
         const { title, description, author, important } = this.state.note;
-        const id =window.location.href.split('/')[4];
+        const id =this.props.location.state.noteKey;
+        // const id =window.location.href.split('/')[4];
         let noteRef = firebase.firestore().collection("notes").doc(id);
         noteRef.update({
           title,
@@ -69,7 +75,8 @@ class NoteEdit extends Component{
       }
 
       componentDidMount() {
-        this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);  
+        this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate); 
+        console.log("received "+this.props.location.state.noteKey); 
       }
 
       componentWillUnmount() {
@@ -82,7 +89,7 @@ render()
     return(
         <div>
             <Navbar />
-           
+          
             {this.state.note && (
 
                     <form className="form">

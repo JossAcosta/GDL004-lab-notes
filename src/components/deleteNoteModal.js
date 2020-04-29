@@ -8,6 +8,7 @@ function DeleteNoteModal (props){
     const history = useHistory();
     const onDeleteNote =()=>{
         let id = window.location.href.split('/')[4];
+       
         firebase.firestore().collection('notes').doc(id).delete()
         .then(() => {
             console.log('Succeful delete');

@@ -6,6 +6,8 @@
     height: 10vh;
     border: 0;
     padding: 2%;
+    font-family: 'Questrial';
+    color: rgba(0, 0, 0, 0.7);
 }
 
 .body_note{

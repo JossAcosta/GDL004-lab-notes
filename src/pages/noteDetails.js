@@ -17,11 +17,13 @@ class SingleNote extends Component{
               modalIsOpen: false,
               note: null,
               user:{ },
+            
             };
           }
         
         handleClick = e => {
-            this.props.history.push("/notes/:noteKey/edit")
+            // this.props.history.push("/edit")
+            console.log('you clicked me')
         }
 
         handleOpenModal = e =>{
@@ -34,8 +36,10 @@ class SingleNote extends Component{
          
           onCollectionUpdate = (querySnapshot) => {
             let note;
-            const currentUrlKey = window.location.href.split('/')[4];
-
+            // const currentUrlKey = window.location.href.split('/')[5];
+            // this.setState({noteKeyEdit : currentUrlKey})
+            const currentUrlKey =  this.props.location.state.noteKey
+            console.log(window.location.href.split('/'))
             querySnapshot.forEach((doc) => {
               const { title, description,  author, important } = doc.data();
               if (doc.id === currentUrlKey) {
@@ -56,6 +60,7 @@ class SingleNote extends Component{
             this.unsubscribe = 
             
             this.ref.onSnapshot(this.onCollectionUpdate);
+            console.log(this.props.location.state);
           }
 
           componentWillUnmount() {
@@ -77,10 +82,16 @@ render()
 
                     <div className="btns_actions">
                   
-                      <Link to={`/notes/${this.state.note.key}/edit`}>
-                      <button className=" btn_edit" >Edit</button>
-                      </Link>
+                      {/* <Link to={`/${this.state.note.key}/edit`}> */}
+                       <Link to={{
+        pathname:'/edit',
+        state: {
+            noteKey: this.state.note.key
+        }
+    }}  >        
+                      <button className=" btn_edit"  onClick = {this.handleClick} >Edit</button>
                       
+                      </Link>
                       <button onClick= {this.handleOpenModal} className=" btn_delete">Delete</button>
                         <DeleteModal 
                         isOpen={this.state.modalIsOpen}

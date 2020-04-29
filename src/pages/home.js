@@ -56,8 +56,6 @@ login(e){
    this.props.history.push("/notes")
  }).catch((error)=> {
   let errorCode = error.code;
-  // let errorMessage = error.message;
-  // [START_EXCLUDE]
   if (errorCode === 'auth/wrong-password') {
     this.setState({message:'Wrong password.'});
     
@@ -81,9 +79,9 @@ signup(e){
   }
   fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
   .then((u)=>{
-    // db.doCreateUser(u.uid, username, email).then(() => {
+  
       this.props.history.push("/notes")
-    // });
+
 
   }).catch((error)=> {
     let errorCode = error.code;
@@ -96,12 +94,6 @@ signup(e){
     }
  });
 }
-    doCreateUser = (id, username, email) =>
-    db.ref(`users/${id}`).set({
-      uid:id,
-      username,
-      email,
-    });
   
     actionHandleLogin = e => {
         const wrap = document.getElementById('main');

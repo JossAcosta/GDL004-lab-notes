@@ -39,7 +39,7 @@ class NotFound extends Component {
                 {/* {this.state.user ?(
                         <p>{this.state.user}</p>
                     ) : null } */}
-                     <p>{this.state.user}</p>
+                     <p>NOT FOUND ! ! !</p>
                     </div>
                 </div>
               

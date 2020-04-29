@@ -94,6 +94,15 @@ signup(e){
     }
  });
 }
+    doCreateUser = (id, username, email) =>{
+      let userInfo = db.ref(`users/${id}`).set({
+        uid:id,
+        username,
+        email,
+      });
+      console.log(userInfo);
+    }
+    
   
     actionHandleLogin = e => {
         const wrap = document.getElementById('main');

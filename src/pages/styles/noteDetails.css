@@ -89,3 +89,23 @@ and (-webkit-min-device-pixel-ratio: 1) {
     
     }
 }
+@media only screen 
+and (max-device-width: 416px) 
+and (orientation: portrait) 
+and (-webkit-min-device-pixel-ratio: 1) {
+    .body_note{
+        
+        height: 60vh;
+    
+    }
+    .btn_edit{
+       
+        width: 140px;
+        
+    }
+    .btn_delete{
+       
+        width: 140px;
+        
+    }
+}

@@ -218,7 +218,7 @@ signup(e){
                       </div>
                     </div>
                    
-                    <a href="/" className="forgotPass">Forgot password?</a>
+                    
                     <div className="login_btns">
                     <a href="/" onClick= {this.signInWithGoogle} > <img src={GoogleLogo} alt="Google Logo"/></a>
                   <button type="submit"

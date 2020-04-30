@@ -65,3 +65,36 @@
   border: 0;
   border-radius: 20px;
 }
+
+@media only screen 
+and (max-device-width: 416px) 
+and (orientation: portrait) 
+and (-webkit-min-device-pixel-ratio: 1) {
+  .title_navabar{
+    font-size: 10px;
+   }
+
+   .title_LAB{
+    font-size: 15px;
+    letter-spacing: 2px;
+  }
+  .title_notes{
+    font-size: 15px;
+    letter-spacing: 2px;
+  }
+
+  .btn-logOut{
+    width: 350px;
+    display: flex;
+    justify-content: flex-end;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: bolder;
+    background-color:  #fdd365;
+    outline: 0;
+    border: 0;
+    border-radius: 20px;
+  }
+}
+

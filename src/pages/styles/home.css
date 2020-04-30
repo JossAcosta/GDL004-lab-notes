@@ -243,6 +243,9 @@
   .input:focus + label:before {
     color: #fdd365;
   }
+  .text-dangerous {
+    color: #dc3545 !important;
+  }
 
   @keyframes loginActive {
     40% {
@@ -377,5 +380,152 @@
               transform: none;
     }
   }
+  
+}
+@media only screen 
+  and (min-device-width: 319px) 
+  and (max-device-width: 767px) 
+  and (orientation: portrait) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+  
+  .login_wrap {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    width: 250px;
+    height: 460px;
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.55);
+    color: #c1c4d6;
+    /* -webkit-transform: translate(-50%, -50%); */
+            transform: translate(-50%, -50%);
+  }
+  .login_action_wrap {
+    position: absolute;
+    top: 0px;
+    left: -20px;
+    height: 240px;
+    width: 280px;
+    background-color: #f7f7f6;
+    border-radius: 3px;
+    box-shadow: 0 0 10px 3px rgba(39, 37, 37, 0.45);
+  }
+  
+  .question_login {
+    /* position: absolute; */
+    top: 60%;
+    left: 55%;
+    /* -webkit-transform: translateY(-50%); */
+            transform: translateX(-50%);
+    width: 200px;
+  }
+  .question_singUp {
+    /* position: absolute; */
+    top: 25%;
+    left: 10%;
+    /* -webkit-transform: translateY(-50%); */
+            /* transform: translateX(-50%); */
+    width: 200px;
+  }
+ 
+  .question_singUp .title,
+  .question_login .title {
+    margin: 0;
+    line-height: 12px;
+    font-size: 18px;
+  }
+  .question_singUp p,
+  .question_login p {
+    padding: 10px 0 10px 0;
+    font-size: 14px;
+  }
+  .action_singUp {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    width: 200px;
+    z-index: 3;
+  }
+  
+  .action_login {
+    position: absolute;
+    top: 260px;
+    left: 10px;
+    width: 200px;
+    z-index: 3;
+  }
+  .btn {
+    min-width: 80px;
+    padding: 0 10px;
+    line-height: 21px;
+    font-size: 12px;
+    letter-spacing: 1px;
+ }
+  .action_singUp .title,
+  .action_login .title {
+    
+    font-size: 15px;
+  }
+  .action_singUp .input,
+  .action_login .input {
+    padding-bottom: 1px;
+    margin-bottom: 2px;
+    border-bottom: 1px solid #c1c4d6;
+    line-height: 10px;
+    font-size: 13px;
+  }
+ .input_block{
+   margin: 12px;
+ }
+ .text-danger{
+   font-size: 10px;
+   margin-bottom: 0px;
+ }
+
+ .login_btns{
+  display: flex;
+  justify-content: space-around;
+  align-items: center
+  
+}
+.login_btns img {
+  cursor: pointer;
+  padding: 0px;
+  
+}
+  @keyframes loginActive {
+    40% {
+      /* -webkit-transform: translateX(320px); */
+              transform: translateY(240px);
+    }
+    65% {
+      /* -webkit-transform: translateX(280px); */
+              transform: translateY(220px);
+    }
+    100% {
+      /* -webkit-transform: translateX(300px); */
+              transform: translateY(240px);
+    }
+  }
+  
+  @keyframes singUpActive {
+    0% {
+      /* -webkit-transform: translateX(300px); */
+              transform: translateY(240px);
+    }
+    40% {
+      /* -webkit-transform: translateX(-20px); */
+              transform: translateY(-5px);
+    }
+    65% {
+      /* -webkit-transform: translateX(20px); */
+              transform: translateY(5px);
+    }
+    100% {
+      /* -webkit-transform: none; */
+              transform: none;
+    }
+  }
+  
   
 }

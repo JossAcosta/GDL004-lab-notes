@@ -87,3 +87,17 @@ and (-webkit-min-device-pixel-ratio: 1) {
        font-size: 15px;
       }
 }
+
+@media only screen 
+and (max-device-width: 415px) 
+and (orientation: portrait) 
+and (-webkit-min-device-pixel-ratio: 1) {
+    .star-button {
+       font-size: 15px;
+      }
+
+      .single_note {
+        grid-template-columns: 85% 15%;
+        
+    }
+}

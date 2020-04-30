@@ -36,7 +36,7 @@ render(){
     return(
      
         <div>
-            <HashRouter  >
+            <HashRouter  basename={'/'} >
      
      <Switch>
             {this.state.user ?

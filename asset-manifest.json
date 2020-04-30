@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/GDL004-lab-notes/static/css/main.d1980e7f.chunk.css",
+    "main.js": "/GDL004-lab-notes/static/js/main.23ce2f02.chunk.js",
+    "main.js.map": "/GDL004-lab-notes/static/js/main.23ce2f02.chunk.js.map",
+    "runtime-main.js": "/GDL004-lab-notes/static/js/runtime-main.9112a11f.js",
+    "runtime-main.js.map": "/GDL004-lab-notes/static/js/runtime-main.9112a11f.js.map",
+    "static/css/2.67123b20.chunk.css": "/GDL004-lab-notes/static/css/2.67123b20.chunk.css",
+    "static/js/2.063eedee.chunk.js": "/GDL004-lab-notes/static/js/2.063eedee.chunk.js",
+    "static/js/2.063eedee.chunk.js.map": "/GDL004-lab-notes/static/js/2.063eedee.chunk.js.map",
+    "index.html": "/GDL004-lab-notes/index.html",
+    "precache-manifest.34003e23b595d1acc4714299a6ba57ba.js": "/GDL004-lab-notes/precache-manifest.34003e23b595d1acc4714299a6ba57ba.js",
+    "service-worker.js": "/GDL004-lab-notes/service-worker.js",
+    "static/css/2.67123b20.chunk.css.map": "/GDL004-lab-notes/static/css/2.67123b20.chunk.css.map",
+    "static/css/main.d1980e7f.chunk.css.map": "/GDL004-lab-notes/static/css/main.d1980e7f.chunk.css.map",
+    "static/js/2.063eedee.chunk.js.LICENSE.txt": "/GDL004-lab-notes/static/js/2.063eedee.chunk.js.LICENSE.txt",
+    "static/media/navbar.css": "/GDL004-lab-notes/static/media/Monoton-Regular.411051cb.ttf",
+    "static/media/noteEdit.css": "/GDL004-lab-notes/static/media/Questrial-Regular.7775b2ab.ttf",
+    "static/media/googleLogo.svg": "/GDL004-lab-notes/static/media/googleLogo.0a7ca061.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9112a11f.js",
+    "static/css/2.67123b20.chunk.css",
+    "static/js/2.063eedee.chunk.js",
+    "static/css/main.d1980e7f.chunk.css",
+    "static/js/main.23ce2f02.chunk.js"
+  ]
+}

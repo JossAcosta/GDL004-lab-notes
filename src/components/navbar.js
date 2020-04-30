@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import { withRouter } from 'react-router-dom';
 import logo from '../images/logo.png';
 import './styles/navbar.css';
 
@@ -10,14 +10,17 @@ class Navbar extends React.Component {
 
     constructor(props){
         super(props)
-       
+        
         this.state={ }
     }
 
-    logout(){
-        
+    logout= (e) =>{
+     
         fire.auth().signOut()   
-           .then(window.location = "/");
+           .then(
+            
+            this.props.history.push('/')
+             );
     }
     render() {
         return <div  className="navbar">
@@ -36,5 +39,6 @@ class Navbar extends React.Component {
         </div>;
     }
 }
+export default withRouter(Navbar);
 
-export default Navbar;
+// export default Navbar;

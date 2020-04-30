@@ -40,5 +40,3 @@ class Navbar extends React.Component {
     }
 }
 export default withRouter(Navbar);
-
-// export default Navbar;

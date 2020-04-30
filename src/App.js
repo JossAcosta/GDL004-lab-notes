@@ -48,8 +48,7 @@ render(){
            <Route exact  path="/new" component={NewNote} />
            <Route exact   path="/edit" component={NoteEdit} />
            <Route exact   path="/:noteKey" component={NoteDetails} />
-          
-           <Route exact   path="/example"component={NotFound} />
+           <Route component={NotFound} />
       
        </Switch>
       

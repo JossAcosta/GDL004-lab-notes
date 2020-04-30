@@ -21,11 +21,6 @@ class SingleNote extends Component{
             };
           }
         
-        handleClick = e => {
-            // this.props.history.push("/edit")
-            console.log('you clicked me')
-        }
-
         handleOpenModal = e =>{
             this.setState({modalIsOpen: true})
         };
@@ -36,10 +31,7 @@ class SingleNote extends Component{
          
           onCollectionUpdate = (querySnapshot) => {
             let note;
-            // const currentUrlKey = window.location.href.split('/')[5];
-            // this.setState({noteKeyEdit : currentUrlKey})
             const currentUrlKey =  this.props.location.state.noteKey
-            console.log(window.location.href.split('/'))
             querySnapshot.forEach((doc) => {
               const { title, description,  author, important } = doc.data();
               if (doc.id === currentUrlKey) {
@@ -82,14 +74,14 @@ render()
 
                     <div className="btns_actions">
                   
-                      {/* <Link to={`/${this.state.note.key}/edit`}> */}
+                  
                        <Link to={{
-        pathname:'/edit',
-        state: {
-            noteKey: this.state.note.key
-        }
-    }}  >        
-                      <button className=" btn_edit"  onClick = {this.handleClick} >Edit</button>
+                          pathname:'/edit',
+                          state: {
+                              noteKey: this.state.note.key
+                          }
+                       }}  >        
+                           <button className=" btn_edit" >Edit</button>
                       
                       </Link>
                       <button onClick= {this.handleOpenModal} className=" btn_delete">Delete</button>

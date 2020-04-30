@@ -11,7 +11,6 @@ function DeleteNoteModal (props){
        
         firebase.firestore().collection('notes').doc(id).delete()
         .then(() => {
-            console.log('Succeful delete');
             history.push("/notes")
         })
         .catch((error) =>{
